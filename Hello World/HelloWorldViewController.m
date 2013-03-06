@@ -9,21 +9,27 @@
 #import "HelloWorldViewController.h"
 
 @interface HelloWorldViewController ()
-
+@property (weak, nonatomic) IBOutlet UILabel *label;
+@property (weak, nonatomic) IBOutlet UITextField *textField;
+- (IBAction)helloButton:(UIButton *)sender;
 @end
 
 @implementation HelloWorldViewController
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+- (IBAction)helloButton:(UIButton *)sender {
+    self.textTypedInTextField = self.textField.text;
+    self.label.text = @"Hola ";
+    
+    if ([self.textField.text isEqual: @""]) {
+        self.label.text = [self.label.text stringByAppendingString: @"mundo!"];
+    } else {
+        self.label.text = [[self.label.text stringByAppendingString:self.textField.text] stringByAppendingString: @"!"];
+    }
 }
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField == self.textField) {
+        [textField resignFirstResponder];
+    }
+    
+    return YES;
 }
-
 @end
