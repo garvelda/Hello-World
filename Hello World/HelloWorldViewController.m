@@ -12,12 +12,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *label;
 @property (weak, nonatomic) IBOutlet UITextField *textField;
 - (IBAction)helloButton:(UIButton *)sender;
+- (IBAction)botonBorrar:(UIButton *)sender;
 @end
 
 @implementation HelloWorldViewController
 - (IBAction)helloButton:(UIButton *)sender {
     self.textTypedInTextField = self.textField.text;
-    self.label.text = @"Hola ";
+    self.label.text = @"¡Hola ";
     
     if ([self.textField.text isEqual: @""]) {
         self.label.text = [self.label.text stringByAppendingString: @"mundo!"];
@@ -25,6 +26,11 @@
         self.label.text = [[self.label.text stringByAppendingString:self.textField.text] stringByAppendingString: @"!"];
     }
 }
+
+- (IBAction)botonBorrar:(UIButton *)sender {
+	self.label.text = @"";
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     if (textField == self.textField) {
         [textField resignFirstResponder];
